@@ -15,6 +15,12 @@ module TrackerApi
           Resources::Person.new({ story_id: story_id }.merge(owner))
         end
       end
+
+      def delete(project_id, story_id, person_id, params={})
+        response = client.delete("/projects/#{project_id}/stories/#{story_id}/owners/#{person_id}", params: params)
+
+        return response.status == 204
+      end
     end
   end
 end

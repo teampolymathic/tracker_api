@@ -103,6 +103,17 @@ module TrackerApi
         end
       end
 
+      # Remove owner from story
+      #
+      # @param [Hash] params
+      # @return [Array[Person]]
+      def remove_owner(person_id, params = {})
+        removed = Endpoints::StoryOwners.new(client).delete(project_id, id, person_id, params)
+        if removed
+          @owners = @owners.select {|owner| owner.id != person_id }
+        end
+      end
+
       # @param [Hash] params attributes to create the task with
       # @return [Task] newly created Task
       def create_task(params)
