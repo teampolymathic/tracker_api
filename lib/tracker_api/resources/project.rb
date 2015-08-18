@@ -172,6 +172,14 @@ module TrackerApi
       def add_membership(params)
         Endpoints::Memberships.new(client).add(id, params)
       end
+
+      # Add a new label for the project.
+      #
+      # @param [String] Name of new label
+      # @return [Label] label that was added to project
+      def add_label(name)
+        Endpoints::Labels.new(client).add(id, { name: name })
+      end
     end
   end
 end
